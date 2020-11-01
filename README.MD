@@ -1,5 +1,5 @@
 <h1> News Web Project API</h1>
-<h2>This Is API For News Web Project.</h2>
+<h2>This Is API For News Web Project With Django And Django-Rest-Framework</h2>
 <h3>1.</h3><h4>User Authentication</h4>
 <h3>2.</h3><h4>Users Types: Non-Authenticated, 
 Authenticated-Non-Upgraded, Authenticated
