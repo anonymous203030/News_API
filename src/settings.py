@@ -4,7 +4,7 @@ import os
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-SECRET_KEY = ':)|(:'
+SECRET_KEY = '^8zln(b3lvgulb@0l2hc3v9(df5t6v3s534&^mm^e!$1%_x)0u'
 
 DEBUG = True
 
@@ -20,7 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # 'debug_toolbar',
+    'debug_toolbar',
 
     #apps
     'posts',
@@ -30,7 +30,6 @@ INSTALLED_APPS = [
     #3-rd party
     'rest_framework',
     'drf_yasg',
-    'paypal.standard.ipn',
 
 ]
 MIDDLEWARE = [
@@ -145,8 +144,4 @@ INTERNAL_IPS = [
     '127.0.0.1',
 ]
 
-# new !
-
-# PAYPAL_RECEIVER_EMAIL = 'youremail@mail.com'
-# PAYPAL_TEST = True
 
