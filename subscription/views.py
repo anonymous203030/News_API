@@ -4,6 +4,7 @@ from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from .models import Subscription, SubscriptionRelation
 from .permissions import IsOwner
 from .serializers import SubscriptionSerializer, SubscriptionRelationSerializer
+from rest_framework import filters
 
 
 # SUBSCRIPTION API VIEWS

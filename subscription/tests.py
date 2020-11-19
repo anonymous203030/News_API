@@ -1,7 +1,6 @@
 import json
 
 from django.contrib.auth import get_user_model
-from django.test import TestCase
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase, APIClient
@@ -48,7 +47,6 @@ class TestSubscription(APITestCase):
         url_list = reverse('subscription_list')
         response = self.client.get(url_list)
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-
 
 
 class TestRelation(APITestCase):

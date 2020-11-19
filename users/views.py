@@ -1,4 +1,4 @@
-from rest_framework import generics, status
+from rest_framework import generics, status, filters
 from rest_framework.exceptions import ValidationError
 from rest_framework.pagination import PageNumberPagination
 
@@ -47,7 +47,11 @@ class UsersListViewSet(generics.ListAPIView):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]
     pagination_class = PageNumberPagination
-
+    filter_backends = [filters.SearchFilter,
+                       filters.OrderingFilter]
+    search_fields = ['username', 'email']
+    ordering_fields = ['created_at', 'updated_at']
+    filterset_fields = ['created_at', 'updated_at']
     # USER PROFILE ViewSets
 
 class UserProfileListViewSet(generics.ListAPIView):
@@ -55,6 +59,11 @@ class UserProfileListViewSet(generics.ListAPIView):
     serializer_class = UserProfileSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]
     pagination_class = PageNumberPagination
+    filter_backends = [filters.SearchFilter,
+                       filters.OrderingFilter]
+    search_filters = ['first_name', 'last_name', 'owner']
+    ordering_fields = ['owner__created_at', 'owner__updated_at']
+    filterset_fields = ['birthday', 'gender']
 
 class UserProfileCreateViewSet(generics.CreateAPIView):
     queryset = UserProfile.objects.all()

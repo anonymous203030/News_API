@@ -1,0 +1,6 @@
+Django==3.1.1
+drf-yasg==1.17.1
+djangorestframework==3.11.1
+django-filter==2.4.0
+django-debug-toolbar===2.2
+django-rest-elasticsearch==0.4.2

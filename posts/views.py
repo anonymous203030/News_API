@@ -68,7 +68,11 @@ class AnyPostListView(ListAPIView):
     serializer_class = PostSerializer
     permission_classes = (AllowAny, )
     pagination_class = PageNumberPagination
-    search_fields = ['title', 'content']
+    filter_backends = [rest_filters.SearchFilter,
+                       rest_filters.OrderingFilter]
+    search_fields = ['user', 'title', 'content']
+    ordering_fields = ['created_at', 'updated_at']
+    filterset_fields = ['title', 'updated_at', 'created_at']
 
 
 # Posts List View For Logged Users
@@ -77,7 +81,11 @@ class LoggedPostListView(ListAPIView):
     serializer_class = PostSerializer
     permission_classes = [IsAuthenticated]
     pagination_class = PageNumberPagination
-    search_fields = ['title', 'content']
+    filter_backends = [rest_filters.SearchFilter,
+                       rest_filters.OrderingFilter]
+    search_fields = ['user', 'title', 'content']
+    ordering_fields = ['created_at', 'updated_at']
+    filterset_fields = ['title', 'updated_at', 'created_at']
 
 
 # Posts List View For Upgraded Users
@@ -86,8 +94,11 @@ class UpgradedPostListView(ListAPIView):
     serializer_class = PostSerializer
     permission_classes = [IsAuthenticated]
     pagination_class = PageNumberPagination
-    filter_backends = [UserUpgraded]
-    search_fields = ['title', 'content']
+    filter_backends = [UserUpgraded, rest_filters.SearchFilter,
+                       rest_filters.OrderingFilter]
+    search_fields = ['user', 'title', 'content']
+    ordering_fields = ['created_at', 'updated_at']
+    filterset_fields = ['title', 'updated_at', 'created_at']
 
 
 #   Custom admin posts
@@ -96,6 +107,12 @@ class CustomPostViewSet(ListAPIView):
     serializer_class = PostSerializer
     permission_classes = [IsOwner, IsAdminUser]
     pagination_class = PageNumberPagination
+    filter_backends = [rest_filters.SearchFilter,
+                       rest_filters.OrderingFilter]
+    search_fields = ['user', 'title', 'content']
+    ordering_fields = ['created_at', 'updated_at']
+    filterset_fields = ['title', 'updated_at', 'created_at', 'paid_content']
+
 
 
 # Custom User Likes And Saves
@@ -104,6 +121,11 @@ class CustomUserPostRelationListViewSet(ListAPIView):
     serializer_class = UserPostRelationSerializer
     permission_classes = [IsOwner, IsAdminUser]
     pagination_class = PageNumberPagination
+    filter_backends = [filters.SearchFilter,
+                       filters.OrderingFilter]
+    search_fields = ['user', 'post']
+    ordering_fields = ['reacted_at']
+    filterset_fields = ['user__email', 'post__title', 'reacted_at']
 
 
 # # User Subscription-Based Posts List
@@ -111,7 +133,10 @@ class UpgradedSubscriptionPostsList(ListAPIView):
     queryset = Posting.objects.all()
     serializer_class = PostSerializer
     permission_classes = [IsAuthenticated]
-    filter_backends = [UserUpgraded]
+    filter_backends = [UserUpgraded, filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['user', 'post']
+    ordering_fields = ['reacted_at']
+    filterset_fields = ['user__email', 'post__title', 'reacted_at']
 
 
 class LoggedSubscriptionPostsList(ListAPIView):
