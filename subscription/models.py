@@ -1,6 +1,4 @@
 from django.db import models
-from multiselectfield import MultiSelectField
-
 from users.models import User
 
 CATEGORY_CHOICES = [
@@ -21,6 +19,7 @@ CATEGORY_CHOICES = [
     'Законодательство о недвижимости'
     'Ипотека'
     'Реновация']
+
 
 class Subscription(models.Model):
     title = models.CharField(max_length=50)
