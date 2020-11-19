@@ -28,9 +28,14 @@ class Subscription(models.Model):
     def __str__(self):
         return f'{self.title}'
 
+    class Meta:
+        app_label = 'subscription'
+
+
 class SubscriptionRelation(models.Model):
     category = models.ManyToManyField(Subscription)
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='Subscribed')
 
     def __str__(self):
         return f'User: {self.user} | Categories:{self.category}'
+
