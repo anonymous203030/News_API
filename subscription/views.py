@@ -1,15 +1,16 @@
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 
-from .models import Subscription
+from .models import Subscription, SubscriptionRelation
 from .permissions import IsOwner
-from .serializers import SubscriptionSerializer
+from .serializers import SubscriptionSerializer, SubscriptionRelationSerializer
 
 
+# SUBSCRIPTION API VIEWS
 class SubscriptionCreateViewSet(generics.CreateAPIView):
     queryset = Subscription.objects.all()
     serializer_class = SubscriptionSerializer
-    permission_classes = (IsAuthenticated, IsAdminUser, )
+    permission_classes = (IsAuthenticated, )
 
 
 class SubscriptionListViewSet(generics.ListAPIView):
@@ -24,3 +25,20 @@ class SubscriptionDetailViewSet(generics.RetrieveUpdateDestroyAPIView):
     permission_classes = (IsOwner, IsAdminUser, )
 
 
+# SUBSCRIPTION RELATION API VIEWS
+class SubscriptionRelationCreateViewSet(generics.CreateAPIView):
+    queryset = SubscriptionRelation.objects.all()
+    serializer_class = SubscriptionRelationSerializer
+    permission_classes = (IsAuthenticated, IsAdminUser)
+
+
+class SubscriptionRelationListViewSet(generics.ListAPIView):
+    queryset = SubscriptionRelation.objects.all()
+    serializer_class = SubscriptionRelationSerializer
+    permission_classes = (IsAuthenticated, IsAdminUser)
+
+
+class SubscriptionRelationDetailViewSet(generics.RetrieveUpdateDestroyAPIView):
+    queryset = SubscriptionRelation.objects.all()
+    serializer_class = SubscriptionRelationSerializer
+    permission_classes = (IsAuthenticated, IsAdminUser)
