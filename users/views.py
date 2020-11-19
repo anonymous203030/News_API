@@ -44,23 +44,23 @@ class LoginAPiViewSet(generics.GenericAPIView):
 class UsersListViewSet(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
-    permission_classes = (IsAuthenticated, IsAdminUser)
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
     # USER PROFILE ViewSets
 
 class UserProfileListViewSet(generics.ListAPIView):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
-    permission_classes = (IsAuthenticated, IsAdminUser)
+    permission_classes = [IsAuthenticated, IsAdminUser]
 
 class UserProfileCreateViewSet(generics.CreateAPIView):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
-    permission_classes = (IsOwner, IsAdminUser)
+    permission_classes = [IsOwner, IsAdminUser]
 
 class UserProfileDetailViewSet(generics.RetrieveUpdateDestroyAPIView):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
-    permission_classes = (IsAdminUser, IsOwner, )
+    permission_classes = [IsAdminUser, IsOwner]
 
 
