@@ -1,5 +1,6 @@
 from rest_framework import generics, status
 from rest_framework.exceptions import ValidationError
+from rest_framework.pagination import PageNumberPagination
 
 from rest_framework.permissions import IsAuthenticated, IsAdminUser
 from rest_framework.response import Response
@@ -45,6 +46,7 @@ class UsersListViewSet(generics.ListAPIView):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]
+    pagination_class = PageNumberPagination
 
     # USER PROFILE ViewSets
 
@@ -52,6 +54,7 @@ class UserProfileListViewSet(generics.ListAPIView):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]
+    pagination_class = PageNumberPagination
 
 class UserProfileCreateViewSet(generics.CreateAPIView):
     queryset = UserProfile.objects.all()
