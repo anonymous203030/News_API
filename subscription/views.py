@@ -10,13 +10,13 @@ from .serializers import SubscriptionSerializer, SubscriptionRelationSerializer
 class SubscriptionCreateViewSet(generics.CreateAPIView):
     queryset = Subscription.objects.all()
     serializer_class = SubscriptionSerializer
-    permission_classes = (IsAuthenticated, )
+    permission_classes = [IsAuthenticated]
 
 
 class SubscriptionListViewSet(generics.ListAPIView):
     queryset = Subscription.objects.all()
     serializer_class = SubscriptionSerializer
-    permission_classes = (IsAuthenticated, IsAdminUser, )
+    permission_classes = [IsAuthenticated]
 
 
 class SubscriptionDetailViewSet(generics.RetrieveUpdateDestroyAPIView):
@@ -29,16 +29,16 @@ class SubscriptionDetailViewSet(generics.RetrieveUpdateDestroyAPIView):
 class SubscriptionRelationCreateViewSet(generics.CreateAPIView):
     queryset = SubscriptionRelation.objects.all()
     serializer_class = SubscriptionRelationSerializer
-    permission_classes = (IsAuthenticated, IsAdminUser)
+    permission_classes = [IsAuthenticated]
 
 
 class SubscriptionRelationListViewSet(generics.ListAPIView):
     queryset = SubscriptionRelation.objects.all()
     serializer_class = SubscriptionRelationSerializer
-    permission_classes = (IsAuthenticated, IsAdminUser)
+    permission_classes = [IsAuthenticated]
 
 
 class SubscriptionRelationDetailViewSet(generics.RetrieveUpdateDestroyAPIView):
     queryset = SubscriptionRelation.objects.all()
     serializer_class = SubscriptionRelationSerializer
-    permission_classes = (IsAuthenticated, IsAdminUser)
+    permission_classes = [IsAuthenticated]

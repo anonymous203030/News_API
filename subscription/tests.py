@@ -20,9 +20,9 @@ class TestSubscription(APITestCase):
 
     def test_valid_subscription_create(self):
         url_create = reverse('subscription_create')
-        self.client.force_login(self.admin_user)
         data = {'title': 'test'}
         data1 = json.dumps(data)
+        self.client.force_login(self.admin_user)
         response = self.client.post(url_create, data1, content_type='application/json')
         self.assertEqual(status.HTTP_201_CREATED, response.status_code)
         self.assertEqual(response.data['title'], data['title'])
@@ -34,6 +34,21 @@ class TestSubscription(APITestCase):
         response = self.client.post(url_create, data1, content_type='application/json')
 
         self.assertEqual(status.HTTP_403_FORBIDDEN, response.status_code)
+
+    def test_valid_subscription_list(self):
+        url_list = reverse('subscription_list')
+        self.client.force_login(self.admin_user)
+        response = self.client.get(url_list)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.client.force_login(self.user)
+        response = self.client.get(url_list)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_invalid_subscription_list(self):
+        url_list = reverse('subscription_list')
+        response = self.client.get(url_list)
+        self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
+
 
 
 class TestRelation(APITestCase):
@@ -61,7 +76,6 @@ class TestRelation(APITestCase):
 
     def test_invalid_relation_create(self):
         url_create = reverse('relation_create')
-        self.client.force_login(self.user)
         data = {
             'user': self.admin_user.id,
             'category': [self.subscription.id],
@@ -69,4 +83,3 @@ class TestRelation(APITestCase):
         data1 =json.dumps(data)
         response = self.client.post(url_create, data1, content_type='application/json')
         self.assertEqual(response.status_code, status.HTTP_403_FORBIDDEN)
-
